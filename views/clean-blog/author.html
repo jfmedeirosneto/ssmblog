@@ -1,0 +1,47 @@
+{% extends "clean-blog/base.html" %}
+
+{% block site_subtile %} | {{ author_name|upper }}{% endblock %}
+
+{% block heading_background_image %}/clean-blog/img/home-bg.jpg{% endblock %}
+
+{% block heading %}{{ author_name|upper }}{% endblock %}
+
+{% block sub_heading %}Showing {{ posts.length }} of {{ author_size }} posts by this author{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+{% for data in posts %}
+            <div class="post-preview">
+                <a href="{{ host }}{{ data.url }}">
+                    <h2 class="post-title">{{ data.title }}</h2>
+                    <h3 class="post-subtitle">{{ data.subtitle }}</h3>
+                </a>
+                <p class="post-tags">
+                    Tags
+{%     for datatag in data.tags %}
+                    <a href="{{ host }}/tag/{{ datatag|replace(r/\s+/g, '+')|lower|urlencode }}/" class="btn btn-default btn-xs" role="button">{{ datatag|upper }}</a>
+{%     endfor %}
+                </p>
+                <p class="post-meta">Writed by <a href="{{ host }}/author/{{ data.author|replace(r/\s+/g, '+')|lower|urlencode }}/">{{ data.author|upper }}</a> at {{ data.date|date }}</p>
+            </div>
+            <hr>
+{% endfor %}
+            <!-- Pager -->
+            <ul class="pager">
+{% if previous %}
+                <li class="previous">
+                    <a href="{{ host }}/author/{{ author_name|replace(r/\s+/g, '+')|lower|urlencode }}/page/{{ previous }}/">&larr; Newer Posts</a>
+                </li>
+{% endif %}
+{% if next %}
+                <li class="next">
+                    <a href="{{ host }}/author/{{ author_name|replace(r/\s+/g, '+')|lower|urlencode }}/page/{{ next }}/">Older Posts &rarr;</a>
+                </li>
+{% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

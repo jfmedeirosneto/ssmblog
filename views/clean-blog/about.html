@@ -1,0 +1,19 @@
+{% extends "clean-blog/base.html" %}
+
+{% block site_subtile %} | About this blog{% endblock %}
+
+{% block heading_background_image %}/clean-blog/img/about-bg.jpg{% endblock %}
+
+{% block heading %}About this blog{% endblock %}
+
+{% block sub_heading %}This is what I do.{% endblock %}
+
+{% block main_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+{% markdown "clean-blog/about.md" %}
+        </div>
+    </div>
+</div>
+{% endblock %}

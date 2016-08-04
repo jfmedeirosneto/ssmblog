@@ -1,0 +1,12 @@
+# Configuration
+title: "ssmb"
+subtitle: "Super Simple Markdown Blog"
+brand: "ssmb"
+description: "Super Simple Markdown Blog"
+author: "John Smith"
+email: "email@email.com"
+user: "admin"
+password: "1234"
+twitter: "http://twiter.com/twitter"
+facebook: "http://facebook.com/facebook"
+github: "https://github.com/jfmedeirosneto/ssmblog"

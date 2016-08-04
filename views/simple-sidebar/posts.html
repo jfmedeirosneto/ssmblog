@@ -1,0 +1,50 @@
+{% extends "simple-sidebar/base.html" %}
+
+{% block site_subtile %} | Admin Posts{% endblock %}
+
+{% block main_content %}
+<div class="panel panel-default">
+    <div class="panel-heading">Novo Post</div>
+    <div class="panel-body">
+        <form class="form-inline" id="uploadForm" enctype="multipart/form-data" action="/admin/post/upload" method="post">
+            <div class="form-group">
+                <input type="file" name="newPost"/>
+            </div>
+            <input class="btn btn-default" type="submit" value="Upload Post" name="submit">
+        </form>
+    </div>
+    <div class="panel-heading">Posts</div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>File</th>
+                    <th>Title</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+{% for data in posts %}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{ data.name }}.md</td>
+                    <td>{{ data.title }}</td>
+                    <td>
+                        <a id="id_preview{{ loop.index }}" class="btn btn-default btn-sm" href="{{ host }}{{ data.url }}" target="_blank" role="button" title="Preview Post">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Preview
+                        </a>
+                        <a id="id_download{{ loop.index }}" class="btn btn-default btn-sm" href="{{ host }}/admin/post/{{ data.name }}/download/" role="button" title="Download Post">
+                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download
+                        </a>
+                        <a id="id_delete{{ loop.index }}" class="btn btn-default btn-sm" href="{{ host }}/admin/post/{{ data.name }}/delete/" title="Delete Post">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                        </a>
+                    </td>
+                </tr>
+{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

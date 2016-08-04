@@ -1,0 +1,27 @@
+{
+  "name": "ssmblog",
+  "version": "0.1.0",
+  "description": "Super Simple Markdown Blog",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "João Neto",
+  "license": "GNU GPLv3",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.0",
+    "fs-extra": "^0.30.0",
+    "js-yaml": "^3.6.1",
+    "marked": "^0.3.5",
+    "multer": "^1.1.0",
+    "nodemailer": "^2.5.0",
+    "nunjucks": "^2.4.2",
+    "nunjucks-date": "^1.2.0",
+    "nunjucks-markdown": "^2.0.0",
+    "showdown": "^1.4.2",
+    "showdown-footnotes": "^2.1.2"
+  }
+}

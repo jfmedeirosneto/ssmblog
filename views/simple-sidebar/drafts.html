@@ -1,0 +1,53 @@
+{% extends "simple-sidebar/base.html" %}
+
+{% block site_subtile %} | Admin Drafts{% endblock %}
+
+{% block main_content %}
+<div class="panel panel-default">
+    <div class="panel-heading">Novo Draft</div>
+    <div class="panel-body">
+        <form class="form-inline" id="uploadForm" enctype="multipart/form-data" action="/admin/draft/upload" method="post">
+            <div class="form-group">
+                <input type="file" name="newDraft"/>
+            </div>
+            <input class="btn btn-default" type="submit" value="Upload Draft" name="submit">
+        </form>
+    </div>
+    <div class="panel-heading">Drafts</div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>File</th>
+                <th>Title</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+{% for data in drafts %}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ data.name }}.md</td>
+                <td>{{ data.title }}</td>
+                <td>
+                    <a id="id_preview{{ loop.index }}" class="btn btn-default btn-sm" href="{{ host }}{{ data.url }}" target="_blank" role="button" title="Preview Draft">
+                        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Preview
+                    </a>
+                    <a id="id_download{{ loop.index }}" class="btn btn-default btn-sm" href="{{ host }}/admin/draft/{{ data.name }}/download/" role="button" title="Download Draft">
+                        <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download
+                    </a>
+                    <a id="id_publish{{ loop.index }}" class="btn btn-default btn-sm" href="{{ host }}/admin/draft/{{ data.name }}/publish/" role="button" title="Publish Draft">
+                        <span class="glyphicon glyphicon-move" aria-hidden="true"></span> Publish
+                    </a>
+                    <a id="id_delete{{ loop.index }}" class="btn btn-default btn-sm" href="{{ host }}/admin/draft/{{ data.name }}/delete/" title="Delete Draft">
+                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                    </a>
+                </td>
+            </tr>
+{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

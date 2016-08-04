@@ -1,0 +1,21 @@
+{% extends "clean-blog/base.html" %}
+
+{% block site_subtile %} | {{ data.title }}{% endblock %}
+
+{% block heading_background_image %}/{{ data.background }}{% endblock %}
+
+{% block heading %}{{ data.title }}{% endblock %}
+
+{% block sub_heading %}{{ data.subtitle }}{% endblock %}
+
+{% block main_content %}
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+{{ data.html }}
+            </div>
+        </div>
+    </div>
+</article>
+{% endblock %}
