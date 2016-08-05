@@ -65,6 +65,38 @@ When running in local mode the Admin page is http://localhost:8080/admin
 - To change the contents of About page edit the about.md file in views\clean-blog directory
 - To change the global config of blog edit the config.yml file in main directory
 
+## Screenshots
+
+### Home Page
+![Home](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/img/home.png "Home")
+
+### Post Page
+![Post](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/img/post.png "Post")
+
+### About Page
+![About](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/img/about.png "About")
+
+### Contact Page
+![Contact](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/img/contact.png "Contact")
+
+### Search Page
+![Search](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/img/search.png "Search")
+
+### Search Results Page
+![Search Results](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/img/search-results.png "Search Results")
+
+### Tag Page
+![Tag](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/img/tag.png "Tag")
+
+### Author Page
+![Author](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/img/author.png "Author")
+
+### Admin Posts Page
+![Admin Posts Page](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/img/admin-posts.png "Admin Posts Page")
+
+### Admin Drafts Page
+![Admin Drafts Page](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/img/admin-drafts.png "Admin Drafts Page")
+
 ## Credits
 
 - Theme by [Start Bootstrap](http://startbootstrap.com/template-overviews/clean-blog/)
