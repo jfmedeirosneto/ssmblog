@@ -19,6 +19,7 @@ Copyright(c) 2016 João Neto <<jfmedeirosneto@yahoo.com.br>>
 ## Run ssmblog
 
 Clone or download the ssmblog from github to a directory
+
 Open prompt in this directory
 
 ``` bash
@@ -27,12 +28,15 @@ $ node index.js
 ```
 
 Open an internet browser in correspondent main page
+
 When running in local mode the main page is http://localhost:8080/
 
 ## Write blog posts
 
 Create a ".md" file in posts folder (ex. hello-world.md)
+
 The name of file is the name of the post
+
 Edit the post according to example bellow
 
 ``` markdown
@@ -50,6 +54,7 @@ Post contents section, write in this section all post text in Markdown markup la
 ```
 
 The url of post is http://localhost:8080/post/hello-world/
+
 All posts is ordering by ascending date in home, tag, author and search pages
 
 The posts created in drafts directory is only acessible by draft url like http://localhost:8080/drafts/hello-world/
@@ -57,6 +62,7 @@ The posts created in drafts directory is only acessible by draft url like http:/
 ## Admin page
 
 When use ssmblog is possible to admin posts and drafts by Admin page.
+
 When running in local mode the Admin page is http://localhost:8080/admin
 
 ## Tips
