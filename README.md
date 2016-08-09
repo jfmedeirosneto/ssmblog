@@ -64,6 +64,7 @@ When running in local mode the Admin page is http://localhost:8080/admin
 - To correct delivery the emails of Contact page check the documentation of [Nodemailer](http://nodemailer.com/) and adjust the transporter variable in index.js file
 - To change the contents of About page edit the about.md file in views\clean-blog directory
 - To change the global config of blog edit the config.yml file in main directory
+- Set new secret on express-session middleware options
 
 ## Screenshots
 

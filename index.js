@@ -13,8 +13,11 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
 
+/*
+ * Express session middleware
+ */
 var session = require('express-session');
-app.use(session({secret: 'n4SxZb9BPsLX9LDyxQmfauZC', resave: false, saveUninitialized: true}));
+app.use(session({secret: 'put your secret here', resave: false, saveUninitialized: true}));
 
 var nunjucks = require('nunjucks');
 var env = nunjucks.configure('views', {
