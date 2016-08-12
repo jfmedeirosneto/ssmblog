@@ -68,8 +68,36 @@ Array.prototype.chunk = function (size) {
     });
 };
 
-var postsDir = __dirname + '/posts/';
-var draftsDir = __dirname + '/drafts/';
+if (typeof String.prototype.startsWith != 'function') {
+    String.prototype.startsWith = function (str) {
+        return str.length > 0 && this.substring(0, str.length) === str;
+    }
+}
+;
+
+if (typeof String.prototype.endsWith != 'function') {
+    String.prototype.endsWith = function (str) {
+        return str.length > 0 && this.substring(this.length - str.length, this.length) === str;
+    }
+}
+;
+
+var dataDir = __dirname + '/data/';
+var postsDir = dataDir + 'posts/';
+var draftsDir = dataDir + 'drafts/';
+var imagesDir = dataDir + 'images/';
+
+if (!fs.existsSync(postsDir)) {
+    fs.mkdirSync(postsDir);
+}
+
+if (!fs.existsSync(draftsDir)) {
+    fs.mkdirSync(draftsDir);
+}
+
+if (!fs.existsSync(imagesDir)) {
+    fs.mkdirSync(imagesDir);
+}
 
 /*
  * Reads the site config
@@ -140,6 +168,23 @@ function getDrafts() {
     return drafts;
 }
 
+function getImages() {
+    var files = fs.readdirSync(imagesDir);
+    var images = [];
+    files.forEach(function (file) {
+        if (file.endsWith('.jpg') ||
+            file.endsWith('.jpeg') ||
+            file.endsWith('.png')) {
+            var data = {
+                name: file,
+                url: '/images/' + file
+            };
+            images.push(data);
+        }
+    });
+    return images;
+}
+
 function getGroup(pageId, groups) {
     var pageIndex = pageId - 1;
     var posts = groups[pageIndex] ? groups[pageIndex] : [];
@@ -149,6 +194,8 @@ function getGroup(pageId, groups) {
 }
 
 app.use(express.static(__dirname + '/public'));
+
+app.use('/images', express.static(imagesDir));
 
 app.use(function (req, res, next) {
     res.locals.host = req.protocol + '://' + req.get('host');
@@ -366,14 +413,16 @@ var utils = {
     getPosts: getPosts,
     getDrafts: getDrafts,
     getGroups: getGroup,
+    getImages: getImages,
     postsDir: postsDir,
-    draftsDir: draftsDir
+    draftsDir: draftsDir,
+    imagesDir: imagesDir
 };
 
 /**
  * ssmblog modules
  */
-require(__dirname + "/admin.js")(app, site, utils);
+require(__dirname + "/admin.js")(app, nunjucks, site, utils);
 
 app.get('*', function (req, res) {
     res.sendStatus(404);
@@ -382,7 +431,7 @@ app.get('*', function (req, res) {
 /*
  * Server
  */
-var server = app.listen(process.env.PORT || 8080, function () {
+var server = app.listen(8080, '127.0.0.1', function () {
     var port = server.address().port;
     console.log("App now running on port", port);
 });

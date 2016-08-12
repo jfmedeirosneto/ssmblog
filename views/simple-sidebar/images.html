@@ -1,0 +1,48 @@
+{% extends "simple-sidebar/base.html" %}
+
+{% block site_subtile %} | Admin Images{% endblock %}
+
+{% block main_content %}
+<div class="panel panel-default">
+    <div class="panel-heading">Upload Image</div>
+    <div class="panel-body">
+        <form class="form-inline" id="uploadForm" enctype="multipart/form-data" action="{{ host }}/admin/image/upload" method="post">
+            <div class="form-group">
+                <input type="file" name="newImage"/>
+            </div>
+            <input class="btn btn-default" type="submit" value="Upload Image" name="submit">
+        </form>
+    </div>
+    <div class="panel-heading">Images</div>
+    <div class="panel-body">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>File</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+{% for data in images %}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{ data.name }}</td>
+                    <td>
+                        <a id="id_preview{{ loop.index }}" class="btn btn-default btn-sm" href="{{ host }}{{ data.url }}" target="_blank" role="button" title="Preview Image">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> Preview
+                        </a>
+                        <a id="id_download{{ loop.index }}" class="btn btn-default btn-sm" href="{{ host }}/admin/image/{{ data.name }}/download/" role="button" title="Download Image">
+                            <span class="glyphicon glyphicon-download" aria-hidden="true"></span> Download
+                        </a>
+                        <a id="id_delete{{ loop.index }}" class="btn btn-default btn-sm" href="{{ host }}/admin/image/{{ data.name }}/delete/" title="Delete Image">
+                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete
+                        </a>
+                    </td>
+                </tr>
+{% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
