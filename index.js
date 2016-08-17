@@ -71,16 +71,14 @@ Array.prototype.chunk = function (size) {
 if (typeof String.prototype.startsWith != 'function') {
     String.prototype.startsWith = function (str) {
         return str.length > 0 && this.substring(0, str.length) === str;
-    }
+    };
 }
-;
 
 if (typeof String.prototype.endsWith != 'function') {
     String.prototype.endsWith = function (str) {
         return str.length > 0 && this.substring(this.length - str.length, this.length) === str;
-    }
+    };
 }
-;
 
 var dataDir = __dirname + '/data/';
 var postsDir = dataDir + 'posts/';
@@ -131,7 +129,7 @@ function getPostData(filePath, baseUrl) {
             tags: tags,
             html: html,
             name: postName,
-            url: baseUrl + postName + '/',
+            url: baseUrl + postName + '/'
         };
     } catch (e) {
         return null;
@@ -203,15 +201,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.get('/', function (req, res) {
-    var page_id = 1;
-    var groups = getPosts().chunk(5);
-    var group = getGroup(page_id, groups);
-    res.render('clean-blog/index.html', {posts: group.posts, previous: group.previus, next: group.next});
-});
-
-app.get('/page/:page_id/', function (req, res) {
-    var page_id = parseInt(req.params.page_id.trim());
+app.get(['/', '/page/:page_id/'], function (req, res) {
+    var page_id = req.params.page_id ? parseInt(req.params.page_id.trim()) : 1;
     var groups = getPosts().chunk(5);
     if (page_id <= groups.length) {
         var group = getGroup(page_id, groups);
@@ -221,26 +212,9 @@ app.get('/page/:page_id/', function (req, res) {
     }
 });
 
-app.get('/tag/:tag_name/', function (req, res) {
+app.get(['/tag/:tag_name/', '/tag/:tag_name/page/:page_id/'], function (req, res) {
     var tag_name = req.params.tag_name.trim().toLowerCase();
-    var page_id = 1;
-    var posts = getPosts().filter(function (data) {
-        return data.tags.indexOf(tag_name) >= 0;
-    });
-    var groups = posts.chunk(5);
-    var group = getGroup(page_id, groups);
-    res.render('clean-blog/tag.html', {
-        tag_name: tag_name,
-        tag_size: posts.length,
-        posts: group.posts,
-        previous: group.previus,
-        next: group.next
-    });
-});
-
-app.get('/tag/:tag_name/page/:page_id/', function (req, res) {
-    var tag_name = req.params.tag_name.trim().toLowerCase();
-    var page_id = parseInt(req.params.page_id.trim());
+    var page_id = req.params.page_id ? parseInt(req.params.page_id.trim()) : 1;
     var posts = getPosts().filter(function (data) {
         return data.tags.indexOf(tag_name) >= 0;
     });
@@ -259,26 +233,9 @@ app.get('/tag/:tag_name/page/:page_id/', function (req, res) {
     }
 });
 
-app.get('/author/:author_name/', function (req, res) {
+app.get(['/author/:author_name/', '/author/:author_name/page/:page_id/'], function (req, res) {
     var author_name = req.params.author_name.trim().replace(/\++/g, '\u0020').toLowerCase();
-    var page_id = 1;
-    var posts = getPosts().filter(function (data) {
-        return data.author == author_name;
-    });
-    var groups = posts.chunk(5);
-    var group = getGroup(page_id, groups);
-    res.render('clean-blog/author.html', {
-        author_name: author_name,
-        author_size: posts.length,
-        posts: group.posts,
-        previous: group.previus,
-        next: group.next
-    });
-});
-
-app.get('/author/:author_name/page/:page_id/', function (req, res) {
-    var author_name = req.params.author_name.trim().replace(/\++/g, '\u0020').toLowerCase();
-    var page_id = parseInt(req.params.page_id.trim());
+    var page_id = req.params.page_id ? parseInt(req.params.page_id.trim()) : 1;
     var posts = getPosts().filter(function (data) {
         return data.author == author_name;
     });
@@ -297,31 +254,9 @@ app.get('/author/:author_name/page/:page_id/', function (req, res) {
     }
 });
 
-app.get('/search/:search_name/', function (req, res) {
+app.get(['/search/:search_name/', '/search/:search_name/page/:page_id/'], function (req, res) {
     var search_name = req.params.search_name.trim().replace(/\++/g, '\u0020').toLowerCase();
-    var page_id = 1;
-    var posts = getPosts().filter(function (data) {
-        var founded = data.title.indexOf(search_name) >= 0;
-        founded = founded || data.subtitle.indexOf(search_name) >= 0;
-        founded = founded || data.author.indexOf(search_name) >= 0;
-        founded = founded || data.html.indexOf(search_name) >= 0;
-        founded = founded || data.tags.indexOf(search_name) >= 0;
-        return founded;
-    });
-    var groups = posts.chunk(5);
-    var group = getGroup(page_id, groups);
-    res.render('clean-blog/search.html', {
-        search_name: search_name,
-        search_size: posts.length,
-        posts: group.posts,
-        previous: group.previus,
-        next: group.next
-    });
-});
-
-app.get('/search/:search_name/page/:page_id/', function (req, res) {
-    var search_name = req.params.search_name.trim().replace(/\++/g, '\u0020').toLowerCase();
-    var page_id = parseInt(req.params.page_id.trim());
+    var page_id = req.params.page_id ? parseInt(req.params.page_id.trim()) : 1;
     var posts = getPosts().filter(function (data) {
         var founded = data.title.indexOf(search_name) >= 0;
         founded = founded || data.subtitle.indexOf(search_name) >= 0;
