@@ -12,6 +12,7 @@ module.exports = function (app, nunjucks, site, utils) {
     var uploadDir = __dirname + '/uploads/';
     var multer = require('multer');
     var upload = multer({dest: uploadDir});
+    var moment = require('moment');
 
     var fs = require('fs');
     var fse = require('fs-extra');
@@ -85,7 +86,8 @@ module.exports = function (app, nunjucks, site, utils) {
     });
 
     app.get('/admin/post/template', auth, function (req, res) {
-        var data = nunjucks.render('template.md', {site: site, date: new Date()});
+        var day = moment(new Date()).format('YYYY-MM-DD HH:mm:ss.SS Z');
+        var data = nunjucks.render('template.md', {site: site, date: day});
         var template = __dirname + '/downloads/post.md';
         fs.writeFileSync(template, data);
         res.download(template);
@@ -119,7 +121,8 @@ module.exports = function (app, nunjucks, site, utils) {
     });
 
     app.get('/admin/draft/template', auth, function (req, res) {
-        var data = nunjucks.render('template.md', {site: site, date: new Date()});
+        var day = moment(new Date()).format('YYYY-MM-DD HH:mm:ss.SS Z');
+        var data = nunjucks.render('template.md', {site: site, date: day});
         var template = __dirname + '/downloads/draft.md';
         fs.writeFileSync(template, data);
         res.download(template);
