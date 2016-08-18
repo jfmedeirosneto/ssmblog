@@ -33,7 +33,7 @@ When running in local mode the main page is http://localhost:8080/
 
 ## Write blog posts
 
-Create a ".md" file in posts folder (ex. hello-world.md)
+Create a ".md" file in data/posts directory (ex. hello-world.md)
 
 The name of file is the name of the post
 
@@ -57,11 +57,11 @@ The url of post is http://localhost:8080/post/hello-world/
 
 All posts is ordering by ascending date in home, tag, author and search pages
 
-The posts created in drafts directory is only acessible by draft url like http://localhost:8080/drafts/hello-world/
+The posts created in data/drafts directory is only acessible by draft url like http://localhost:8080/drafts/hello-world/
 
 ## Admin page
 
-When use ssmblog is possible to admin posts and drafts by Admin page.
+When use ssmblog is possible to admin posts, drafts and images by Admin page.
 
 When running in local mode the Admin page is http://localhost:8080/admin
 
@@ -98,11 +98,8 @@ When running in local mode the Admin page is http://localhost:8080/admin
 ### Author Page
 ![Author](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/screenshots/author.png "Author")
 
-### Admin Posts Page
-![Admin Posts Page](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/screenshots/admin-posts.png "Admin Posts Page")
-
-### Admin Drafts Page
-![Admin Drafts Page](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/screenshots/admin-drafts.png "Admin Drafts Page")
+### Admin Page
+![Admin Page](https://raw.githubusercontent.com/jfmedeirosneto/ssmblog/master/screenshots/admin.png "Admin Page")
 
 ## Credits
 
